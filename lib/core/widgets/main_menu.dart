@@ -1,6 +1,6 @@
-import 'package:clone_spotify/controller/grid_controller.dart';
 import 'package:clone_spotify/core/shared/app_strings.dart';
-import 'package:clone_spotify/models/filter_type.dart';
+import 'package:clone_spotify/feature/controller/grid_controller.dart';
+import 'package:clone_spotify/feature/models/filter_type.dart';
 import 'package:flutter/material.dart';
 
 import 'button.dart';

@@ -1,5 +1,5 @@
 import 'package:clone_spotify/core/shared/app_colors.dart';
-import 'package:clone_spotify/core/shared/app_styles.dart';
+import 'package:clone_spotify/core/shared/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
@@ -28,10 +28,10 @@ class Button extends StatelessWidget {
           child: Text(
             title,
             style: isSelected
-                ? AppStyles.white12w400.copyWith(
+                ? AppTextStyles.white12w400.copyWith(
                     color: AppColors.deepBlack,
                   )
-                : AppStyles.white12w400,
+                : AppTextStyles.white12w400,
           ),
         ),
       ),

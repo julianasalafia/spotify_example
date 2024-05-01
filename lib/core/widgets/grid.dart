@@ -1,4 +1,4 @@
-import 'package:clone_spotify/controller/grid_controller.dart';
+import 'package:clone_spotify/feature/controller/grid_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'last_play.dart';

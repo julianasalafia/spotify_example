@@ -1,7 +1,7 @@
+import 'package:clone_spotify/feature/view/home.dart';
 import 'package:flutter/material.dart';
 
 import 'core/shared/app_strings.dart';
-import 'view/home.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:clone_spotify/core/shared/app_styles.dart';
-import 'package:clone_spotify/models/card_info_model.dart';
+import 'package:clone_spotify/core/shared/app_text_styles.dart';
+import 'package:clone_spotify/feature/models/card_info_model.dart';
 import 'package:flutter/material.dart';
 
 import '../shared/app_colors.dart';
@@ -53,7 +53,7 @@ class LastPlay extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
                     child: Text(
                       cardInfoModel.title,
-                      style: AppStyles.white12w400,
+                      style: AppTextStyles.white12w400,
                     ),
                   ),
                 ),

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:clone_spotify/models/filter_type.dart';
+import 'package:clone_spotify/feature/models/filter_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
