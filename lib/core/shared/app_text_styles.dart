@@ -19,4 +19,10 @@ class AppTextStyles {
     fontSize: 12,
     fontWeight: FontWeight.w400,
   );
+
+  static TextStyle black24w700 = const TextStyle(
+    color: AppColors.deepBlack,
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+  );
 }

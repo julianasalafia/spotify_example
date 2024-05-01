@@ -13,36 +13,39 @@ class Grid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: gridController.updateList,
-      builder: (context, value, child) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.4,
-            width: MediaQuery.sizeOf(context).width,
-            child: FutureBuilder(
-              future: gridController.getCardInfo(),
-              builder: (context, snapshot) {
-                return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 4,
-                    mainAxisSpacing: 8,
-                    childAspectRatio: 3.5,
-                  ),
-                  itemCount: gridController.currentList.length,
-                  itemBuilder: (context, index) {
-                    return LastPlay(
-                      cardInfoModel: gridController.currentList[index],
-                    );
-                  },
-                );
-              },
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: ValueListenableBuilder(
+        valueListenable: gridController.updateList,
+        builder: (context, value, child) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.35,
+              width: MediaQuery.sizeOf(context).width,
+              child: FutureBuilder(
+                future: gridController.getCardInfo(),
+                builder: (context, snapshot) {
+                  return GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 4,
+                      mainAxisSpacing: 8,
+                      childAspectRatio: 3.5,
+                    ),
+                    itemCount: gridController.currentList.length,
+                    itemBuilder: (context, index) {
+                      return LastPlay(
+                        cardInfoModel: gridController.currentList[index],
+                      );
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
