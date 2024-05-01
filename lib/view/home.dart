@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
 
 import '../controller/home_controller.dart';
 import '../core/shared/app_colors.dart';
 import '../core/shared/app_strings.dart';
 import '../core/shared/app_styles.dart';
-import '../core/widgets/grid_music.dart';
+import '../core/widgets/grid.dart';
 import '../core/widgets/main_menu.dart';
 
 class Home extends StatelessWidget {
-  HomeController homeController = HomeController();
+  final HomeController homeController = HomeController();
 
   Home({super.key});
 
@@ -27,7 +26,7 @@ class Home extends StatelessWidget {
                 gridController: homeController.gridController,
               ),
               const SizedBox(height: 8),
-              GridMusic(
+              Grid(
                 gridController: homeController.gridController,
               ),
               const SizedBox(height: 8),

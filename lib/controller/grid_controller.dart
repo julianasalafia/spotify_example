@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:clone_spotify/models/filter_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,14 +8,15 @@ import '../models/card_info_model.dart';
 
 class GridController with ChangeNotifier {
   final List<CardInfoModel> cardInfo = [];
+  final ValueNotifier<FilterType> updateList = ValueNotifier(FilterType.all);
   List<CardInfoModel> currentList = [];
-  final ValueNotifier<int> updateNotifier = ValueNotifier(0);
+  FilterType currentFilter = FilterType.all;
 
   GridController() {
     getCardInfo().then((value) {
       cardInfo.addAll(value);
       currentList = cardInfo;
-      updateNotifier.value++;
+      notifyListeners();
     });
   }
 
@@ -26,28 +28,39 @@ class GridController with ChangeNotifier {
     );
   }
 
-  void setList(int value) {
-    if (value == -1) {
+  void setList({required FilterType type}) {
+    if (currentFilter == type) {
+      currentFilter = FilterType.all;
       showAll();
-    } else if (value == 0) {
-      filterAlbum();
     } else {
-      filterPodcast();
+      currentFilter = type;
+      switch (type) {
+        case FilterType.album:
+          filterAlbum();
+          break;
+        case FilterType.podcast:
+          filterPodcast();
+          break;
+        default:
+          showAll();
+          break;
+      }
     }
+    updateList.value = currentFilter;
   }
 
   void filterAlbum() {
     currentList = cardInfo.where((element) => element.type == 'Álbum').toList();
-    updateNotifier.value++;
+    notifyListeners();
   }
 
   void filterPodcast() {
     currentList = cardInfo.where((element) => element.type == 'Podcast').toList();
-    updateNotifier.value++;
+    notifyListeners();
   }
 
   void showAll() {
     currentList = cardInfo;
-    updateNotifier.value++;
+    notifyListeners();
   }
 }

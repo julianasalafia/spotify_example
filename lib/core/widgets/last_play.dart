@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 
 import '../shared/app_colors.dart';
 
-class MusicCard extends StatelessWidget {
+class LastPlay extends StatelessWidget {
   final CardInfoModel cardInfoModel;
 
-  const MusicCard({
+  const LastPlay({
     super.key,
     required this.cardInfoModel,
   });

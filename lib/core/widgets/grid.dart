@@ -1,12 +1,12 @@
 import 'package:clone_spotify/controller/grid_controller.dart';
 import 'package:flutter/material.dart';
 
-import 'music_card.dart';
+import 'last_play.dart';
 
-class GridMusic extends StatelessWidget {
-  GridController gridController;
+class Grid extends StatelessWidget {
+  final GridController gridController;
 
-  GridMusic({
+  const Grid({
     super.key,
     required this.gridController,
   });
@@ -14,7 +14,7 @@ class GridMusic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: gridController.updateNotifier,
+      valueListenable: gridController.updateList,
       builder: (context, value, child) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -33,7 +33,7 @@ class GridMusic extends StatelessWidget {
                   ),
                   itemCount: gridController.currentList.length,
                   itemBuilder: (context, index) {
-                    return MusicCard(
+                    return LastPlay(
                       cardInfoModel: gridController.currentList[index],
                     );
                   },
