@@ -16,7 +16,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: gridController.updateList,
+      valueListenable: gridController.currentFilter,
       builder: (context, value, child) {
         return Row(
           children: [
@@ -38,7 +38,7 @@ class MainMenu extends StatelessWidget {
               onTap: () {
                 gridController.setList(type: FilterType.album);
               },
-              isSelected: gridController.currentFilter == FilterType.album,
+              isSelected: value == FilterType.album,
               title: AppStrings.musica,
             ),
             const SizedBox(width: 8),
@@ -46,7 +46,7 @@ class MainMenu extends StatelessWidget {
               onTap: () {
                 gridController.setList(type: FilterType.podcast);
               },
-              isSelected: gridController.currentFilter == FilterType.podcast,
+              isSelected: value == FilterType.podcast,
               title: AppStrings.podcast,
             ),
           ],

@@ -7,60 +7,55 @@ import 'package:flutter/services.dart';
 import '../models/card_info_model.dart';
 
 class GridController with ChangeNotifier {
-  final List<CardInfoModel> cardInfo = [];
-  final ValueNotifier<FilterType> updateList = ValueNotifier(FilterType.all);
-  List<CardInfoModel> currentList = [];
-  FilterType currentFilter = FilterType.all;
+  final ValueNotifier<List<CardInfoModel>> filteredList = ValueNotifier([]);
+  final ValueNotifier<FilterType> currentFilter = ValueNotifier(FilterType.all);
+  final List<CardInfoModel> unfilteredList = [];
 
   GridController() {
-    getCardInfo().then((value) {
-      cardInfo.addAll(value);
-      currentList = cardInfo;
-      notifyListeners();
-    });
+    setCurrentList();
   }
 
-  Future<List<CardInfoModel>> getCardInfo() async {
+  void setCurrentList() async {
     final String response = await rootBundle.loadString('assets/json/data.json');
     final data = json.decode(response);
-    return List<CardInfoModel>.from(
+
+    final result = List<CardInfoModel>.from(
       data.map((x) => CardInfoModel.fromJson(x)),
+    );
+
+    unfilteredList.clear();
+    unfilteredList.addAll(result);
+
+    filteredList.value = getCurrentList(
+      type: currentFilter.value,
+      list: unfilteredList,
     );
   }
 
   void setList({required FilterType type}) {
-    if (currentFilter == type) {
-      currentFilter = FilterType.all;
-      showAll();
+    if (type == currentFilter.value) {
+      currentFilter.value = FilterType.all;
     } else {
-      currentFilter = type;
-      switch (type) {
-        case FilterType.album:
-          filterAlbum();
-          break;
-        case FilterType.podcast:
-          filterPodcast();
-          break;
-        default:
-          showAll();
-          break;
-      }
+      currentFilter.value = type;
     }
-    updateList.value = currentFilter;
+
+    filteredList.value = getCurrentList(
+      type: currentFilter.value,
+      list: unfilteredList,
+    );
   }
 
-  void filterAlbum() {
-    currentList = cardInfo.where((element) => element.type == 'Álbum').toList();
-    notifyListeners();
-  }
-
-  void filterPodcast() {
-    currentList = cardInfo.where((element) => element.type == 'Podcast').toList();
-    notifyListeners();
-  }
-
-  void showAll() {
-    currentList = cardInfo;
-    notifyListeners();
+  List<CardInfoModel> getCurrentList({
+    required FilterType type,
+    required List<CardInfoModel> list,
+  }) {
+    switch (type) {
+      case FilterType.album:
+        return list.where((element) => element.type == 'Álbum').toList();
+      case FilterType.podcast:
+        return list.where((element) => element.type == 'Podcast').toList();
+      default:
+        return list;
+    }
   }
 }

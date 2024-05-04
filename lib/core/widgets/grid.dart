@@ -16,29 +16,29 @@ class Grid extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: ValueListenableBuilder(
-        valueListenable: gridController.updateList,
+        valueListenable: gridController.filteredList,
         builder: (context, value, child) {
+          if (gridController.filteredList.value.isEmpty) {
+            return const Center(
+              child: LinearProgressIndicator(),
+            );
+          }
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.35,
               width: MediaQuery.sizeOf(context).width,
-              child: FutureBuilder(
-                future: gridController.getCardInfo(),
-                builder: (context, snapshot) {
-                  return GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 4,
-                      mainAxisSpacing: 8,
-                      childAspectRatio: 3.5,
-                    ),
-                    itemCount: gridController.currentList.length,
-                    itemBuilder: (context, index) {
-                      return LastPlay(
-                        cardInfoModel: gridController.currentList[index],
-                      );
-                    },
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 3.5,
+                ),
+                itemCount: gridController.filteredList.value.length,
+                itemBuilder: (context, index) {
+                  return LastPlay(
+                    cardInfoModel: gridController.filteredList.value[index],
                   );
                 },
               ),
