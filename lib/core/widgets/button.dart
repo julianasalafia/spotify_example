@@ -1,5 +1,6 @@
 import 'package:clone_spotify/core/shared/app_colors.dart';
 import 'package:clone_spotify/core/shared/app_text_styles.dart';
+import 'package:clone_spotify/core/shared/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
@@ -16,12 +17,13 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).extension<CustomTheme>()!;
     return InkWell(
-      onTap: onTap,
       borderRadius: BorderRadius.circular(20),
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.green : AppColors.darkGrey,
+          color: isSelected ? theme.selectedColor : theme.cardColor,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
@@ -32,7 +34,9 @@ class Button extends StatelessWidget {
                 ? AppTextStyles.white12w400.copyWith(
                     color: AppColors.deepBlack,
                   )
-                : AppTextStyles.white12w400,
+                : AppTextStyles.white12w400.copyWith(
+                    color: theme.textColor,
+                  ),
           ),
         ),
       ),

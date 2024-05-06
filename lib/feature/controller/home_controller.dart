@@ -1,13 +1,13 @@
-import 'package:clone_spotify/core/shared/theme.dart';
+import 'package:clone_spotify/core/shared/theme_controller.dart';
 
 import 'grid_controller.dart';
 
 class HomeController {
   final GridController gridController;
-  final ThemeFlutter themeFlutter;
+  final ThemeController themeController;
 
   HomeController({
     required this.gridController,
-    required this.themeFlutter,
+    required this.themeController,
   });
 }

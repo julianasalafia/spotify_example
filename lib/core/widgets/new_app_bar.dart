@@ -1,15 +1,13 @@
 import 'package:clone_spotify/core/shared/app_colors.dart';
-import 'package:clone_spotify/core/shared/theme.dart';
+import 'package:clone_spotify/main.dart';
 import 'package:flutter/material.dart';
 
 class NewAppBar extends StatelessWidget {
   final VoidCallback onPressed;
-  final ThemeFlutter themeFlutter;
 
   const NewAppBar({
     super.key,
     required this.onPressed,
-    required this.themeFlutter,
   });
 
   @override
@@ -21,7 +19,7 @@ class NewAppBar extends StatelessWidget {
         child: TextButton(
           onPressed: onPressed,
           child: Icon(
-            themeFlutter.darkTheme ? Icons.dark_mode : Icons.light_mode,
+            themeController.value ? Icons.dark_mode : Icons.light_mode,
             color: AppColors.mediumGrey,
           ),
         ),
